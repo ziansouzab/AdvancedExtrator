@@ -13,7 +13,7 @@ def extract_from_pdf_path(bank_code, pdf_path: str, make_xlsx: bool = True) -> T
         return [], None, dict(total_debitos=0.0, total_creditos=0.0, saldo_liquido=0.0)
 
     lancamentos = extrator.extrair_lancamentos(bank_code, texto)
-    # Calcula totais
+
     total_debitos = sum(l['Valor'] for l in lancamentos if l.get('Movimento') == 'DÉBITO')
     total_creditos = sum(l['Valor'] for l in lancamentos if l.get('Movimento') == 'CRÉDITO')
     saldo_liquido = (total_creditos - total_debitos)

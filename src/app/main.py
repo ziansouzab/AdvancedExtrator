@@ -41,12 +41,17 @@ def extract_pdf(bank_code = Form(...), file: UploadFile = File(...), save_xlsx =
 
     lancamentos, xlsx_filename, totals = extract_from_pdf_path(bank_code, pdf_path, make_xlsx=save_xlsx)
 
+    if xlsx_filename:
+        download_url = f"/api/v1/files/{xlsx_filename}"
+    else:
+        None
+
     return ExtractResponse(
         total_lancamentos=len(lancamentos),
         total_debitos=totals["total_debitos"],
         total_creditos=totals["total_creditos"],
         saldo_liquido=totals["saldo_liquido"],
-        xlsx_filename=xlsx_filename,
+        download_url=download_url,
     )
 
 @app.get("/api/v1/files/{filename}")

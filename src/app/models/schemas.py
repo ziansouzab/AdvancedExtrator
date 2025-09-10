@@ -16,4 +16,4 @@ class ExtractResponse(BaseModel):
     total_debitos: float
     total_creditos: float
     saldo_liquido: float
-    xlsx_filename: Optional[str] = None
+    download_url: Optional[str] = None
